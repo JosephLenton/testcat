@@ -2,6 +2,11 @@
 name = "testcat"
 version = "0.1.0"
 edition = "2021"
+authors = ["josephlenton@gmail.com <josephlenton@gmail.com>"]
+license = "MIT"
+description = "Macros for writing more readable tests"
+repository = "https://github.com/JosephLenton/testcat"
+
 
 [lib]
 proc-macro = true
