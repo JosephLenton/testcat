@@ -5,7 +5,6 @@ pub type Result<N> = ::std::result::Result<N, Error>;
 
 #[derive(Copy, Clone, PartialEq, Debug)]
 pub enum Error {
-    UnexpectedTokenGiven,
     TestDescriptionExpected,
     EmptyDescriptionGiven,
     CommaExpected,
@@ -23,7 +22,6 @@ impl From<fmt::Error> for Error {
 impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Error::UnexpectedTokenGiven => write!(f, "Unexpected token given"),
             Error::TestDescriptionExpected => write!(f, "Expected test description"),
             Error::EmptyDescriptionGiven => write!(f, "Empty test description given"),
             Error::CommaExpected => write!(f, "Expected comma seperator"),
