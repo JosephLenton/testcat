@@ -2,8 +2,12 @@
 mod it_macro {
     use ::testcat::*;
 
-    it!("example should assert true", test_assert_true);
-    test!("example a is less than b", test_a_and_b);
+    describe!("assertion examples", {
+        it!("should assert true", test_assert_true);
+        it!("should assert a is less than b", test_a_and_b);
+    });
+
+    test!("5 is less than 9", test_5_and_9);
 
     fn test_assert_true() {
         assert_eq!(true, true)
@@ -14,5 +18,9 @@ mod it_macro {
         let b = 9;
 
         assert!(a < b)
+    }
+
+    fn test_5_and_9() {
+        assert!(5 < 9)
     }
 }

@@ -9,6 +9,7 @@ pub enum Error {
     EmptyDescriptionGiven,
     CommaExpected,
     TestNameExpected,
+    CodeBlockExpected,
     ExcessTokensFound,
     FmtError(fmt::Error),
 }
@@ -26,6 +27,7 @@ impl fmt::Display for Error {
             Error::EmptyDescriptionGiven => write!(f, "Empty test description given"),
             Error::CommaExpected => write!(f, "Expected comma seperator"),
             Error::TestNameExpected => write!(f, "Expected test name"),
+            Error::CodeBlockExpected => write!(f, "Expected code block"),
             Error::ExcessTokensFound => write!(f, "Extra tokens found"),
             Error::FmtError(fmt) => write!(
                 f,

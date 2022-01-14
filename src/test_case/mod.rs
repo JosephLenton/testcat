@@ -1,9 +1,9 @@
 mod ast;
-mod error;
 mod grammar;
 mod output;
 
-pub use self::error::*;
+pub use crate::common::Error;
+pub use crate::common::Result;
 use ::proc_macro2::TokenStream;
 
 pub fn test_case_impl(stream: TokenStream) -> TokenStream {
@@ -32,6 +32,22 @@ mod test_case_impl {
         let expected = quote! {
           #[test]
           fn it_should_do_blah_and_not_foo() {
+            test_foo_blah()
+          }
+        };
+
+        assert_eq!(output.to_string(), expected.to_string());
+    }
+
+    #[test]
+    fn it_should_prefix_test_with_an_underscore_when_identifier_starts_with_a_number() {
+        let output = test_case_impl(quote! {
+          "123 abc", test_foo_blah
+        });
+
+        let expected = quote! {
+          #[test]
+          fn _123_abc() {
             test_foo_blah()
           }
         };
