@@ -2,11 +2,12 @@
 name = "testcat"
 version = "0.2.0"
 edition = "2021"
+keywords = ["testing", "tests", "test", "unit", "jest"]
+categories = ["development-tools", "development-tools::testing"]
 authors = ["josephlenton@gmail.com <josephlenton@gmail.com>"]
 license = "MIT"
 description = "Macros for writing more readable tests"
 repository = "https://github.com/JosephLenton/testcat"
-
 
 [lib]
 proc-macro = true
