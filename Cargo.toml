@@ -1,6 +1,6 @@
 [package]
 name = "testcat"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["josephlenton@gmail.com <josephlenton@gmail.com>"]
 license = "MIT"
@@ -12,9 +12,8 @@ repository = "https://github.com/JosephLenton/testcat"
 proc-macro = true
 
 [dependencies]
-proc-macro2 = "1.0.24"
-quote = "1.0.9"
-syn = { version = "1.0.63", features = ["derive", "printing", "parsing", "full", "extra-traits"] }
+proc-macro2 = "1.0.36"
+quote = "1.0.14"
 
 [dev-dependencies]
-pretty_assertions = "0.6.1"
+pretty_assertions = "1.0.0"
