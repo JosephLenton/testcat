@@ -6,9 +6,14 @@ TestCat allows you to write your test cases out at the top of a file.
 This is to improve readability. It makes it easier to see what test
 cases exist within a file, which is especially useful on PR reviews.
 
+Macros include ...
+
+ * `it` and `test`
+ * `describe`
+
 ## `it` and `test`
 
-`it` and `test` macros allow you to list test cases out together at the top.
+`it` and `test` are identical macros allow you to list test cases out together at the top.
 These transform into a wrapper function, that calls your test.
 
 For example ...
