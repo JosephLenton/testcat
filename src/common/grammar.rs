@@ -43,89 +43,87 @@ fn description_to_identifier(description: String) -> String {
     let mut is_at_start = true;
 
     while let Some(c) = chars.next() {
-      // Find start of the description.
-      if is_at_start {
-        if c.is_alphanumeric() || c == '_' {
-          if !c.is_alphabetic() && c != '_' {
-            dest.push('_');
-          }
+        // This first 'is_at_start' block allows us to trim left whitespace.
+        if is_at_start {
+            if is_non_starting_ident_char(c) {
+                dest.push(c);
+                is_at_start = false;
+            }
 
-          dest.push(c);
-          is_at_start = false;
+            continue;
         }
 
-        continue;
-      }
+        if is_non_starting_ident_char(c) {
+            dest.push(c);
+            continue;
+        }
 
-      if c.is_alphanumeric() || c == '_' {
-        dest.push(c);
-        continue;
-      }
-
-      if c.is_whitespace() {
-        dest.push('_');
-        continue;
-      }
+        if c.is_whitespace() {
+            dest.push('_');
+            continue;
+        }
     }
 
     dest
 }
 
+pub fn is_starting_ident_char(c: char) -> bool {
+    c.is_alphabetic() || c == '_'
+}
+
+pub fn is_non_starting_ident_char(c: char) -> bool {
+    c.is_alphanumeric() || c == '_'
+}
+
 #[cfg(test)]
 mod description_to_identifier {
-  use super::*;
+    use super::*;
 
-  #[test]
-  fn it_should_return_an_empty_string_if_given_string_is_empty() {
-    let result = description_to_identifier("".to_string());
-    assert_eq!(result, "");
-  }
+    #[test]
+    fn it_should_return_an_empty_string_if_given_string_is_empty() {
+        let result = description_to_identifier("".to_string());
+        assert_eq!(result, "");
+    }
 
-  #[test]
-  fn it_should_return_same_identifier_if_all_valid() {
-    let result = description_to_identifier("foo".to_string());
-    assert_eq!(result, "foo");
-  }
+    #[test]
+    fn it_should_return_same_identifier_if_all_valid() {
+        let result = description_to_identifier("foo".to_string());
+        assert_eq!(result, "foo");
+    }
 
-  #[test]
-  fn it_should_prefix_with_an_underscore_if_begins_with_numbers() {
-    let result = description_to_identifier("123".to_string());
-    assert_eq!(result, "_123");
-  }
+    #[test]
+    fn it_should_turn_spaces_into_underscores() {
+        let result = description_to_identifier("foo bar".to_string());
+        assert_eq!(result, "foo_bar");
+    }
 
-  #[test]
-  fn it_should_turn_spaces_into_underscores() {
-    let result = description_to_identifier("foo bar".to_string());
-    assert_eq!(result, "foo_bar");
-  }
+    #[test]
+    fn it_should_trim_a_starting_quote() {
+        let result = description_to_identifier("\"foo".to_string());
+        assert_eq!(result, "foo");
+    }
 
-  #[test]
-  fn it_should_trim_a_starting_quote() {
-    let result = description_to_identifier("\"foo".to_string());
-    assert_eq!(result, "foo");
-  }
+    #[test]
+    fn it_should_trim_an_ending_quote() {
+        let result = description_to_identifier("foo\"".to_string());
+        assert_eq!(result, "foo");
+    }
 
-  #[test]
-  fn it_should_trim_an_ending_quote() {
-    let result = description_to_identifier("foo\"".to_string());
-    assert_eq!(result, "foo");
-  }
+    #[test]
+    fn it_should_trim_start_and_ending_quotes() {
+        let result = description_to_identifier("\"foo\"".to_string());
+        assert_eq!(result, "foo");
+    }
 
-  #[test]
-  fn it_should_trim_start_and_ending_quotes() {
-    let result = description_to_identifier("\"foo\"".to_string());
-    assert_eq!(result, "foo");
-  }
+    #[test]
+    fn it_should_trim_starting_whitespace() {
+        let result = description_to_identifier("  foo".to_string());
+        assert_eq!(result, "foo");
+    }
 
-  #[test]
-  fn it_should_trim_starting_whitespace() {
-    let result = description_to_identifier("  foo".to_string());
-    assert_eq!(result, "foo");
-  }
-
-  #[test]
-  fn it_should_drop_non_alphanumeric_characters() {
-    let result = description_to_identifier("doesn't".to_string());
-    assert_eq!(result, "doesnt");
-  }
+    #[test]
+    fn it_should_drop_non_alphanumeric_characters() {
+        let result = description_to_identifier("doesn't".to_string());
+        assert_eq!(result, "doesnt");
+    }
 }

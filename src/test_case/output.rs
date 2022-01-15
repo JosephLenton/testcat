@@ -4,14 +4,15 @@ use ::proc_macro2::TokenStream;
 use ::quote::format_ident;
 use ::quote::quote;
 
-pub fn build(ast: TestCaseAST) -> TokenStream {
-    let test_description = format_ident!("{}", &ast.test_description);
-    let test_name = format_ident!("{}", &ast.test_name);
+pub fn build(ast: TestCaseAST, test_description_prefix: &'static str) -> TokenStream {
+    let test_description = &ast.test_description;
+    let test_description_ident = format_ident!("{test_description_prefix}_{test_description}");
+    let test_name_ident = format_ident!("{}", &ast.test_name);
 
     quote! {
         #[test]
-        fn #test_description() {
-          #test_name()
+        fn #test_description_ident() {
+          #test_name_ident()
         }
     }
 }
@@ -23,10 +24,13 @@ mod build {
 
     #[test]
     fn it_should_output_test_function_with_wrapper() {
-        let output = build(TestCaseAST {
-            test_description: "it_should_do_blah".to_string(),
-            test_name: "my_test_function".to_string(),
-        });
+        let output = build(
+            TestCaseAST {
+                test_description: "should_do_blah".to_string(),
+                test_name: "my_test_function".to_string(),
+            },
+            &"it",
+        );
 
         let expected = quote! {
           #[test]

@@ -7,14 +7,12 @@ pub use crate::common::Result;
 use ::proc_macro2::TokenStream;
 
 pub fn describe_impl(stream: TokenStream) -> TokenStream {
-    match build_describe(stream) {
+    let result = grammar::parse(stream).map(output::build);
+
+    match result {
         Ok(output) => output,
         Err(err) => panic!("{}", err),
     }
-}
-
-fn build_describe(stream: TokenStream) -> Result<TokenStream> {
-    grammar::parse(stream).map(output::build)
 }
 
 #[cfg(test)]
