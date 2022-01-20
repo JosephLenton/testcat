@@ -54,7 +54,7 @@ mod angle_to {
 
 Running `cargo test` you get an output like this ...
 
-<img src="examples/examples/test-angle-to-screenshot.png" alt="Example cargo test output" width="500" />
+<img src="examples/test-angle-to-screenshot.png" alt="Example cargo test output" width="500" />
 
 ## `it` and `test` macros
 
