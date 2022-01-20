@@ -19,6 +19,43 @@ containing a large number of tests.
 By having the test cases grouped together. It makes it easier to see,
 at a glance, what test cases exist. This is especially useful for PR reviews.
 
+### Full Example
+
+In short it allows you to document your test cases like this ...
+
+```rust
+#[cfg(test)]
+mod angle_to {
+    use super::*;
+    use ::testcat::*;
+    use ::assert_approx_eq::assert_approx_eq;
+    use ::std::f32::consts::TAU;
+
+    describe!("angle to zero", {
+        it!("should angle to zero from right", test_angle_to_zero_from_right);
+        it!("should angle to zero from above", test_angle_to_zero_from_above);
+        it!("should angle to zero from left", test_angle_to_zero_from_left);
+        it!("should angle to zero from below", test_angle_to_zero_from_below);
+    });
+
+    describe!("angle to point", {
+        it!("should angle to point from right", test_angle_to_point_from_right);
+        it!("should angle to point from above", test_angle_to_point_from_above);
+        it!("should angle to point from left", test_angle_to_point_from_left);
+        it!("should angle to point from below", test_angle_to_point_from_below);
+    });
+
+    fn test_angle_to_zero_from_right() {
+      // code omitted
+    }
+
+    // rest of test functions omitted
+```
+
+Running `cargo test` you get an output like this ...
+
+<img src="examples/examples/test-angle-to-screenshot.png" alt="Example cargo test output" width="500" />
+
 ## `it` and `test` macros
 
 `it` and `test` are identical macros allow you to list test cases out together at the top.
