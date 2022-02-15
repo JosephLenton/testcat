@@ -60,4 +60,20 @@ mod test_case_impl {
 
         assert_eq!(output.to_string(), expected.to_string());
     }
+
+    #[test]
+    fn it_should_allow_module_names() {
+        let output = it_impl(quote! {
+          "should do blah and not foo", some_module::test_blah_not_foo
+        });
+
+        let expected = quote! {
+          #[test]
+          fn it_should_do_blah_and_not_foo() {
+            some_module::test_blah_not_foo()
+          }
+        };
+
+        assert_eq!(output.to_string(), expected.to_string());
+    }
 }

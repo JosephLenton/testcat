@@ -92,6 +92,37 @@ mod testing {
 }
 ```
 
+### Module Names
+
+You can also use a module paths for test names.
+
+```
+#[cfg(test)]
+mod testing {
+  use ::testcat::*;
+
+  it!("should allow the user to do x", test_use::test_does_x);
+  it!("should not allow the user to do y", test_use::test_y_disallowed);
+  test!("foobobulator doesn't crash", test_foo::test_foobobulator);
+
+  mod test_use {
+    fn test_does_x() {
+      // code omitted
+    }
+
+    fn test_y_disallowed() {
+      // code omitted
+    }
+  }
+
+  mod test_foo {
+    fn test_foobobulator() {
+      // code omitted
+    }
+  }
+}
+```
+
 ## `describe` macro
 
 `describe` blocks are for grouping similar tests together.
