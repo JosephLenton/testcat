@@ -106,17 +106,17 @@ mod testing {
   test!("foobobulator doesn't crash", test_foo::test_foobobulator);
 
   mod test_use {
-    fn test_does_x() {
+    pub fn test_does_x() {
       // code omitted
     }
 
-    fn test_y_disallowed() {
+    pub fn test_y_disallowed() {
       // code omitted
     }
   }
 
   mod test_foo {
-    fn test_foobobulator() {
+    pub fn test_foobobulator() {
       // code omitted
     }
   }
