@@ -2,10 +2,11 @@ mod common;
 mod describe;
 mod test_case;
 
+use ::proc_macro::TokenStream;
+
 use crate::describe::describe_impl;
 use crate::test_case::it_impl;
 use crate::test_case::test_impl;
-use ::proc_macro::TokenStream;
 
 #[proc_macro]
 pub fn test(stream: TokenStream) -> TokenStream {

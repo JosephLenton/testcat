@@ -1,6 +1,6 @@
 [package]
 name = "testcat"
-version = "2.0.1"
+version = "2.1.0"
 edition = "2021"
 keywords = ["testing", "tests", "test", "unit", "jest"]
 categories = ["development-tools", "development-tools::testing"]
@@ -13,9 +13,9 @@ repository = "https://github.com/JosephLenton/testcat"
 proc-macro = true
 
 [dependencies]
-proc-macro2 = "1.0.36"
-quote = "1.0.14"
-syn = { version = "1.0.86", features = ["parsing"] }
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = { version = "2.0", features = ["parsing"] }
 
 [dev-dependencies]
-pretty_assertions = "1.0.0"
+pretty_assertions = "1.4"

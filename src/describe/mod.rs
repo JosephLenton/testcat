@@ -2,8 +2,6 @@ mod ast;
 mod grammar;
 mod output;
 
-pub use crate::common::Error;
-pub use crate::common::Result;
 use ::proc_macro2::TokenStream;
 
 pub fn describe_impl(stream: TokenStream) -> TokenStream {
